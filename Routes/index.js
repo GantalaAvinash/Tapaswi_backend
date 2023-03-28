@@ -2,6 +2,7 @@ const express = require("express");
 const HouseContact = require("../Controllers/HouseContact"); 
 const Houses = require("../Controllers/houses");
 const studentsController = require("../Controllers/student");
+const visitorController = require("../Controllers/visitor");
 const router = express.Router();
 
 router.route('/housecontact').post(HouseContact.createHouseContact);   
