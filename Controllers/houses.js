@@ -9,7 +9,12 @@ exports.createHouse = (req, res) => {
         name: name,
         description: description,
         image: image,
-        imageLg: imageLg,
+        imageLg: [
+            { url: imageLg[0] },
+            { url: imageLg[1] },
+            { url: imageLg[2] },
+            { url: imageLg[3] }
+        ],
         country: country,
         address: address,
         bedrooms: bedrooms,
@@ -18,7 +23,7 @@ exports.createHouse = (req, res) => {
         year: year,
         price: price,
     });
-    if (!type || !name || !description || !image || !imageLg || !country || !address || !bedrooms || !bathrooms || !surface || !year || !price) {
+    if (!type || !name || !description || !image || !country || !address || !bedrooms || !bathrooms || !surface || !year || !price) {
         res.status(200).json({ message: "Please enter all details" });
     } else {
         house

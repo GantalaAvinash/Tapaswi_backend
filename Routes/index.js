@@ -5,10 +5,12 @@ const UserController = require("../Controllers/user");
 const visitorController = require("../Controllers/visitor");
 const router = express.Router();
 
+// house contact routes
 router.route('/housecontact').post(HouseContact.createHouseContact);   
 router.route('/housecontact').get(HouseContact.getHouseContact);
 router.route('/housecontact/:house_id').get(HouseContact.getHouseContactById);
 router.route('/housecontact/:house_id').delete(HouseContact.deleteHouseContactById);
+// house routes
 router.route('/houses').get(Houses.getHouses);
 router.route('/houses/:house_id').get(Houses.getHouseById);
 router.route('/houses/:house_id').delete(Houses.deleteHouse);

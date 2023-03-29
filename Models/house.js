@@ -28,10 +28,7 @@ const HouseSchema = new Schema({
         required: true
     },
     imageLg: [{
-        url:String,
-        url:String,
-        url:String,
-        url:String
+        url: { type: String }
     }],
     country: String,
     address: String,
