@@ -3,18 +3,12 @@ const house = require("../Models/house");
 
 // create a new house
 exports.createHouse = (req, res) => {
-    const { type, name, description, image, imageLg, country, address, bedrooms, bathrooms, surface, year, price } = req.body;
-    const house = new house({
+    const { type, name, description, image, sliderImages, country, address, bedrooms, bathrooms, surface, year, price } = req.body;
+    const newhouse = new house({
         type: type,
         name: name,
         description: description,
         image: image,
-        imageLg: [
-            { url: imageLg[0] },
-            { url: imageLg[1] },
-            { url: imageLg[2] },
-            { url: imageLg[3] }
-        ],
         country: country,
         address: address,
         bedrooms: bedrooms,
@@ -22,11 +16,12 @@ exports.createHouse = (req, res) => {
         surface: surface,
         year: year,
         price: price,
+        sliderImages: sliderImages
     });
     if (!type || !name || !description || !image || !country || !address || !bedrooms || !bathrooms || !surface || !year || !price) {
         res.status(200).json({ message: "Please enter all details" });
     } else {
-        house
+        newhouse
             .save()
             .then(() => {
                 res.status(200).json({ message: "Data saved successfully" });

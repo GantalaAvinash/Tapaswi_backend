@@ -27,16 +27,34 @@ const HouseSchema = new Schema({
         type: String,
         required: true
     },
-    imageLg: [{
-        url: { type: String }
-    }],
-    country: String,
-    address: String,
-    bedrooms: Number,
-    bathrooms: Number,
-    surface: Number,
-    year: Number,
-    price: Number,
+    sliderImages: [{ imageUrl: String }],
+    country: {
+        type: String,
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    bedrooms: {
+        type: Number,
+        required: true
+    },
+    bathrooms: {
+        type: Number,
+        required: true
+    },
+    surface: {
+        type: Number,
+        required: true
+    },
+    year: {
+        type: Number,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
     },  
 )
 
