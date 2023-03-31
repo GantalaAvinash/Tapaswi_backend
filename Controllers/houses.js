@@ -17,7 +17,7 @@ const houseSchema = Joi.object({
     year: Joi.number().integer().min(1800).max(new Date().getFullYear()).required(),
     price: Joi.number().positive().required(),
     sliderImages: Joi.array().items(Joi.object({
-        imageUrl: Joi.string().uri().required()
+        imageUrl: Joi.string().uri()
     }))
 });
 
