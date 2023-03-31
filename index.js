@@ -44,9 +44,8 @@ connection.on('error', (error) => {
 });
 
 
-
+mongoose.set('strictQuery', false);
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.set('strictQuery', true);
 
 
 app.listen(PORT, () => {
