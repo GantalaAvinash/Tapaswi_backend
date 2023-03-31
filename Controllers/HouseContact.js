@@ -36,10 +36,10 @@ exports.getHouseContact = (req, res) => {
 // get contact form by id
 exports.getHouseContactById = async (req, res, next) => {
     try {
-        const { house_id } = req.params;
+        const { contact_id } = req.params;
 
         const houseList = await Housecontact.findOne({
-            house_id: house_id,
+            contact_id: contact_id,
         });
         res.status(200).json({
             status: true,
@@ -56,14 +56,22 @@ exports.getHouseContactById = async (req, res, next) => {
 // delete contact form by id
 exports.deleteHouseContactById = async (req, res, next) => {
     try {
-        const { house_id } = req.params;
+        const { contact_id } = req.params;
 
-        const houseList = await Housecontact.deleteOne({
-            house_id: house_id,
+        const result = await Housecontact.deleteOne({
+            contact_id: contact_id,
         });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({
+                status: false,
+                error: 'House contact not found',
+            });
+        }
+
         res.status(200).json({
             status: true,
-            house: houseList,
+            message: 'House contact deleted',
         });
     } catch (error) {
         res.status(500).json({
