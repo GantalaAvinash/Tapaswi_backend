@@ -20,6 +20,12 @@ router.route('/housesbytype/:type').get(Houses.getHouseByType);
 router.route('/housesbyaddress/:address').get(Houses.getHouseByAddress);
 router.route('/housesbyprice/:price').get(Houses.getHouseByPrice);
 router.route('/housesbysurface/:surface').get(Houses.getHouseBySurface);
+router.route('/housesbybedrooms/:bedrooms').get(Houses.getHouseByBedrooms);
+router.route('/housesbybathrooms/:bathrooms').get(Houses.getHouseByBathrooms);
+//getHouseByPriceRange?min=1000&max=2000
+router.route('/housesbypricerange').get(Houses.getHouseByPriceRange);
+//getHouseBySurfaceRange?min=1000&max=2000
+router.route('/housesbysurfacerange').get(Houses.getHouseBySurfaceRange);
 // user signup and login routes
 router.route('/user').post(UserController.userSignUp);
 router.route('/user').get(UserController.getUsers);

@@ -32,19 +32,23 @@ app.get('/', (req, res) => {
 	res.send('Welcome to Tapaswi Property Management System');
 });
 
- // Database connection
- const connection = mongoose.connection;
+// Database connection
+const connection = mongoose.connection;
+
 connection.once('open', () => {
-  console.log('MongoDB connection established successfully');
+	console.log('MongoDB connection established successfully');
 });
 
-connection.on('error', (err) => {
-  console.log('MongoDB connection error:', err);
+connection.on('error', (error) => {
+	console.log('MongoDB connection error:', error);
 });
 
-app.listen(PORT, async () => {
-    // mongoose.connect(mongourl);
-	mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-	mongoose.set('strictQuery', true);
-    console.log(`Node Server started on port ${PORT}`)
-})
+
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.set('strictQuery', true);
+
+
+app.listen(PORT, () => {
+	console.log(`Node Server started on port ${PORT}`)
+});
