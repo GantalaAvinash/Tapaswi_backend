@@ -2,54 +2,36 @@
 const house = require("../Models/house");
 
 // create a new house
+const Joi = require('joi');
+
+const houseSchema = Joi.object({
+    type: Joi.string().required(),
+    name: Joi.string().required(),
+    description: Joi.string().required(),
+    image: Joi.string().uri().required(),
+    country: Joi.string().required(),
+    address: Joi.string().required(),
+    bedrooms: Joi.number().integer().positive().required(),
+    bathrooms: Joi.number().integer().positive().required(),
+    surface: Joi.number().positive().required(),
+    year: Joi.number().integer().min(1800).max(new Date().getFullYear()).required(),
+    price: Joi.number().positive().required(),
+    sliderImages: Joi.array().items(Joi.object({
+        imageUrl: Joi.string().uri().required()
+    }))
+});
+
 exports.createHouse = async (req, res) => {
     try {
-        const {
-            type,
-            name,
-            description,
-            image,
-            sliderImages,
-            country,
-            address,
-            bedrooms,
-            bathrooms,
-            surface,
-            year,
-            price,
-        } = req.body;
-        const newhouse = new house({
-            type: type,
-            name: name,
-            description: description,
-            image: image,
-            country: country,
-            address: address,
-            bedrooms: bedrooms,
-            bathrooms: bathrooms,
-            surface: surface,
-            year: year,
-            price: price,
-            sliderImages: sliderImages,
-        });
-        if (
-            !type ||
-            !name ||
-            !description ||
-            !image ||
-            !country ||
-            !address ||
-            !bedrooms ||
-            !bathrooms ||
-            !surface ||
-            !year ||
-            !price
-        ) {
-            res.status(400).json({ message: "Please fill all the fields" });
-        } else {
-            await newhouse.save();
-            res.status(200).json({ message: "Data saved successfully" });
+        const { error, value } = houseSchema.validate(req.body, { abortEarly: false });
+        if (error) {
+            const messages = error.details.map(d => d.message);
+            return res.status(400).json({ message: messages });
         }
+
+        const newhouse = new house(value);
+        await newhouse.save();
+        res.status(200).json({ message: "Data saved successfully" });
     } catch (err) {
         res.status(500).json({ error: err });
     }

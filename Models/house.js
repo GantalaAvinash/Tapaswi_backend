@@ -27,7 +27,11 @@ const HouseSchema = new Schema({
         type: String,
         required: true
     },
-    sliderImages: [{ imageUrl: String }],
+    sliderImages: [{
+         imageUrl:{
+          type: String
+         }
+    }],
     country: {
         type: String,
     },
