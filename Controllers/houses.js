@@ -17,7 +17,7 @@ const houseSchema = Joi.object({
     year: Joi.number().integer().min(1800).max(new Date().getFullYear()).required(),
     price: Joi.number().positive().required(),
     sliderImages: Joi.array().items(Joi.object({
-        imageUrl: Joi.string().uri()
+        imageUrl: Joi.string().uri().required
     }))
 });
 
@@ -29,7 +29,7 @@ exports.createHouse = async (req, res) => {
             return res.status(400).json({ message: messages });
         }
 
-        const newhouse = new house(value);
+        const newhouse = new House(value);
         await newhouse.save();
         res.status(200).json({ message: "Data saved successfully" });
     } catch (err) {
